@@ -1,0 +1,30 @@
+{
+  "name": "ts-api",
+  "version": "1.0.0",
+  "description": "Serverless Cloud TypeScript API template",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "cloud:build": "vite build",
+    "cloud:dev": "vite",
+    "start": "cloud dev"
+  },
+  "devDependencies": {
+    "@serverless/cloud": "^2.0.0",
+    "@types/jest": "^26.0.24",
+    "@vitejs/plugin-react": "^1.3.2",
+    "vite": "^2.9.9"
+  },
+  "serverless": {
+    "app": "firepass",
+    "org": "saferate"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.1.0",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "framer-motion": "^6.3.4",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
