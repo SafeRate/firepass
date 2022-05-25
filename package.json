@@ -7,7 +7,8 @@
   "scripts": {
     "cloud:build": "vite build",
     "cloud:dev": "vite",
-    "start": "cloud dev"
+    "start": "cloud dev",
+    "dev": "vite"
   },
   "devDependencies": {
     "@serverless/cloud": "^2.0.0",
@@ -25,6 +26,7 @@
     "@emotion/styled": "^11.8.1",
     "framer-motion": "^6.3.4",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-text-mask": "^5.4.3"
   }
 }
