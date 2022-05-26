@@ -14,7 +14,7 @@ const App = () => {
     passcode: null,
     sessionId: null,
     SSN: null,
-    stepNumber: 3,
+    stepNumber: 1,
     transactionKey: null,
     zipCode: null,
   });

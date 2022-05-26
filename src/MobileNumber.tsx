@@ -5,7 +5,7 @@ import { GRAPHQL_URL } from "./utils/constants";
 import useFetch from "./utils/useFetch";
 
 const MobileNumber = (props) => {
-  const [isMobileNumberInvalid, setIsMobileNumberInvalid] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
 
@@ -27,7 +27,7 @@ const MobileNumber = (props) => {
           size="md"
           maxW="64"
         />
-        {isMobileNumberInvalid && (
+        {formErrors && formErrors.includes("mobileNumber") && (
           <Box color={"red.600"}>Phone number is invalid</Box>
         )}
       </Flex>
@@ -42,12 +42,9 @@ const MobileNumber = (props) => {
               const isValidPhoneNumber = digits.length === 10;
 
               if (isValidPhoneNumber) {
-                if (isMobileNumberInvalid) {
-                  setIsMobileNumberInvalid(false);
-                }
                 setIsFetching(true);
               } else {
-                setIsMobileNumberInvalid(true);
+                setFormErrors(["mobilePhone"]);
               }
             }}
           >
@@ -56,7 +53,15 @@ const MobileNumber = (props) => {
         </Box>
       </Flex>
       {isFetching && (
-        <MobileNumberFetch mobileNumber={mobileNumber} {...props} />
+        <MobileNumberFetch
+          mobileNumber={mobileNumber}
+          {...props}
+          setIsFetching={setIsFetching}
+          setFormErrors={setFormErrors}
+        />
+      )}
+      {formErrors && formErrors.includes("server") && (
+        <Box color={"red.600"}>Internal server error</Box>
       )}
     </>
   );
@@ -64,7 +69,13 @@ const MobileNumber = (props) => {
 
 export default MobileNumber;
 
-const MobileNumberFetch = ({ currentState, mobileNumber, setCurrentState }) => {
+const MobileNumberFetch = ({
+  currentState,
+  mobileNumber,
+  setCurrentState,
+  setIsFetching,
+  setFormErrors,
+}) => {
   const { data, error } = useFetch<any>(GRAPHQL_URL, {
     method: "POST",
     headers: {
@@ -115,6 +126,8 @@ const MobileNumberFetch = ({ currentState, mobileNumber, setCurrentState }) => {
   useEffect(() => {
     if (error) {
       console.error(error);
+      setIsFetching(false);
+      setFormErrors(["server"]);
     }
   }, [error]);
 

@@ -18,6 +18,7 @@ const Passcode = (props) => {
   const [passcode, setPasscode] = useState("");
   const [SSN, setSSN] = useState("");
   const [zipCode, setZipCode] = useState("");
+  console.log("formErrors", formErrors);
 
   return (
     <>
@@ -99,10 +100,28 @@ const Passcode = (props) => {
             isDisabled={isFetching}
             isLoading={isFetching}
             onClick={() => {
+              const formErrors = [];
+              if (!zipCode || !passcode || !SSN) {
+                if (!zipCode) {
+                  formErrors.push("zipCode");
+                }
+
+                if (!passcode) {
+                  formErrors.push("passcode");
+                }
+
+                if (!SSN) {
+                  formErrors.push("SSN");
+                }
+
+                setFormErrors(formErrors);
+
+                return;
+              }
+
               const digitsZipCode = zipCode.match(/\d/g).join("");
               const digitsPasscode = passcode.match(/\d/g).join("");
               const digitsSSN = SSN.match(/\d/g).join("");
-              const formErrors = [];
 
               const isValidPasscode = digitsPasscode.length === 6;
               const isValidSSN = digitsSSN.length === 4;
@@ -136,8 +155,13 @@ const Passcode = (props) => {
           SSN={SSN}
           zipCode={zipCode}
           passcode={passcode}
+          setIsFetching={setIsFetching}
+          setFormErrors={setFormErrors}
           {...props}
         />
+      )}
+      {formErrors && formErrors.includes("server") && (
+        <Box color={"red.600"}>Internal server error</Box>
       )}
     </>
   );
@@ -149,6 +173,8 @@ const PasscodeFetch = ({
   currentState,
   passcode,
   setCurrentState,
+  setFormErrors,
+  setIsFetching,
   SSN,
   zipCode,
 }) => {
@@ -194,6 +220,8 @@ const PasscodeFetch = ({
   useEffect(() => {
     if (error) {
       console.error(error);
+      setIsFetching(false);
+      setFormErrors(["server"]);
     }
   }, [error]);
 

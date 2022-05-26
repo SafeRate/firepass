@@ -5,6 +5,7 @@ import useFetch from "./utils/useFetch";
 
 const VerifyIdentity = (props) => {
   const [isFetching, setIsFetching] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
 
   return (
     <Flex
@@ -26,14 +27,28 @@ const VerifyIdentity = (props) => {
       >
         Get Started
       </Button>
-      {isFetching && <VerifyIdentityFetch {...props} />}
+      {isFetching && (
+        <VerifyIdentityFetch
+          {...props}
+          setFormErrors={setFormErrors}
+          setIsFetching={setIsFetching}
+        />
+      )}
+      {formErrors && formErrors.includes("server") && (
+        <Box color={"red.600"}>Internal server error</Box>
+      )}
     </Flex>
   );
 };
 
 export default VerifyIdentity;
 
-const VerifyIdentityFetch = ({ currentState, setCurrentState }) => {
+const VerifyIdentityFetch = ({
+  currentState,
+  setCurrentState,
+  setFormErrors,
+  setIsFetching,
+}) => {
   const { data, error } = useFetch<any>(GRAPHQL_URL, {
     method: "POST",
     headers: {
@@ -80,6 +95,8 @@ const VerifyIdentityFetch = ({ currentState, setCurrentState }) => {
   useEffect(() => {
     if (error) {
       console.error(error);
+      setIsFetching(false);
+      setFormErrors(["server"]);
     }
   }, [error]);
 
