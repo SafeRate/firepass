@@ -185,11 +185,8 @@ const PasscodeFetch = ({
     },
     body: JSON.stringify({
       query: `
-          query completeInstaTouchIdOtp($mobileNumber: String!, $passcode: String!, $sessionId: String!, $transactionKey: String!, $zipCode: String!, $ssn: String!) {
-            completeInstaTouchIdOtp(mobileNumber: $mobileNumber, passcode: $passcode, sessionId: $sessionId, transactionKey: $transactionKey, zipCode: $zipCode, SSN: $ssn) {
-                sessionId
-                transactionKey
-            }
+          mutation completeInstaTouchIdOtp($mobileNumber: String!, $passcode: String!, $sessionId: String!, $transactionKey: String!, $zipCode: String!, $SSN: String!) {
+            completeInstaTouchIdOtp(mobileNumber: $mobileNumber, passcode: $passcode, sessionId: $sessionId, transactionKey: $transactionKey, zipCode: $zipCode, SSN: $SSN)
           }
         `,
       variables: {
