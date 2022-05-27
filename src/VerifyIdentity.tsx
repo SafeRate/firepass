@@ -13,8 +13,8 @@ const VerifyIdentity = (props) => {
       alignItems="center"
       flexDirection={"column"}
     >
-      <Box fontSize="2xl" fontWeight="bold">
-        Verify your identity
+      <Box fontSize="md" fontWeight="400" padding="1rem 1.5rem">
+        Let's verify your identity in 3 easy steps with 3 pieces of info!
       </Box>
       <Button
         colorScheme={"purple"}

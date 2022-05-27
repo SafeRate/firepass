@@ -5,10 +5,12 @@ import Passcode from "./Passcode";
 import Success from "./Success";
 import VerifyIdentity from "./VerifyIdentity";
 import MobileNumber from "./MobileNumber";
+import Consent from "./Consent";
 
 const App = () => {
   const [currentState, setCurrentState] = useState({
     carrier: null,
+    consent: null,
     instaTouch: null,
     mobileNumber: null,
     passcode: null,
@@ -30,9 +32,15 @@ const App = () => {
         p="2"
       >
         <Flex alignItems={"center"}>
-          <SafeRateLogo width="6rem" />{" "}
-          <Box fontWeight={"extrabold"} fontSize="2xl">
-            SafeRate FirePass
+          <SafeRateLogo width="9rem" />{" "}
+          <Box
+            ml={2}
+            mt={0.8}
+            fontFamily={"arial"}
+            fontWeight={"normal"}
+            fontSize="1.20rem"
+          >
+            FirePass
           </Box>
         </Flex>
         <Divider my="1" />
@@ -43,11 +51,16 @@ const App = () => {
               setCurrentState={setCurrentState}
             />
           ) : currentState.stepNumber === 2 ? (
-            <MobileNumber
+            <Consent
               currentState={currentState}
               setCurrentState={setCurrentState}
             />
           ) : currentState.stepNumber === 3 ? (
+            <MobileNumber
+              currentState={currentState}
+              setCurrentState={setCurrentState}
+            />
+          ) : currentState.stepNumber === 4 ? (
             <Passcode
               currentState={currentState}
               setCurrentState={setCurrentState}

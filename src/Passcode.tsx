@@ -29,7 +29,7 @@ const Passcode = (props) => {
       >
         <Box maxW="20rem">
           <FormControl isInvalid={formErrors.includes("passcode")} my="2">
-            <FormLabel htmlFor="passcode">Passcode</FormLabel>
+            <FormLabel htmlFor="passcode">Verification code</FormLabel>
             <Input
               id="passcode"
               type="text"
@@ -48,7 +48,7 @@ const Passcode = (props) => {
               </FormErrorMessage>
             )}
             <FormHelperText>
-              This is a number that is text messaged to you
+              This is the code sent via text message
             </FormHelperText>
           </FormControl>
           <FormControl isInvalid={formErrors.includes("zipCode")} my="2">

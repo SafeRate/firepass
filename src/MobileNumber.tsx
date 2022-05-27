@@ -15,9 +15,13 @@ const MobileNumber = (props) => {
         justifyContent={"center"}
         alignItems="center"
         flexDirection={"column"}
+        padding="1rem 1.5rem"
       >
-        <Box fontSize="2xl" fontWeight="bold" my="2">
-          Enter your cell phone
+        <Box fontSize="md" fontWeight="400" my="2">
+          Please provide your mobile phone number
+        </Box>
+        <Box mt="0.25rem" fontSize="sm" color="gray.600">
+          We'll send a code to this number to verify your identity
         </Box>
         <InputPhoneNumber
           onChange={(e) => {
@@ -26,6 +30,7 @@ const MobileNumber = (props) => {
           }}
           size="md"
           maxW="64"
+          mt="1rem"
         />
         {formErrors && formErrors.includes("mobileNumber") && (
           <Box color={"red.600"}>Phone number is invalid</Box>
