@@ -9,7 +9,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { GRAPHQL_URL } from "./utils/constants";
+import { env } from "./utils/env";
 import useFetch from "./utils/useFetch";
 
 const Passcode = (props) => {
@@ -178,7 +178,7 @@ const PasscodeFetch = ({
   SSN,
   zipCode,
 }) => {
-  const { data, error } = useFetch<any>(GRAPHQL_URL, {
+  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

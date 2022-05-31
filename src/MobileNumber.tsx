@@ -1,7 +1,7 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import InputPhoneNumber from "./components/InputPhoneNumber";
-import { GRAPHQL_URL } from "./utils/constants";
+import { env } from "./utils/env";
 import useFetch from "./utils/useFetch";
 
 const MobileNumber = (props) => {
@@ -18,7 +18,7 @@ const MobileNumber = (props) => {
         padding="1rem 1.5rem"
       >
         <Box fontSize="md" fontWeight="400" my="2">
-          Please provide your mobile phone number
+          Please provide your mobile phone number (Step 2 of 3)
         </Box>
         <Box mt="0.25rem" fontSize="sm" color="gray.600">
           We'll send a code to this number to verify your identity
@@ -81,7 +81,7 @@ const MobileNumberFetch = ({
   setIsFetching,
   setFormErrors,
 }) => {
-  const { data, error } = useFetch<any>(GRAPHQL_URL, {
+  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const Consent = ({ currentState, setCurrentState }) => {
       padding="1rem 1.5rem"
     >
       <Box fontSize="md" fontWeight="bold" textAlign={"center"}>
-        About your data
+        Consent (Step 1 of 3)
       </Box>
       <Box mt="1rem" fontWeight="600" fontSize="sm">
         What information about me are you obtaining?
@@ -23,11 +23,12 @@ const Consent = ({ currentState, setCurrentState }) => {
         How will the information be used?
       </Box>
       <Box mt="0.25rem" fontSize="sm">
-        You can decide to use your identity information to begin monitoring your
-        credit score and receive personalized recommendations to strengthen your
-        credit score. You can also request that we use your identity information
-        to obtain a pre-approval or complete a loan application. These uses will
-        only take place at your explicit request.
+        The information will only be stored. You can decide to use your identity
+        information to begin monitoring your credit score and receive
+        personalized recommendations to strengthen your credit score. You can
+        also request that we use your identity information to obtain a
+        pre-approval or complete a loan application. These uses will only take
+        place at your explicit request.
       </Box>
       <Box mt="1rem" fontWeight="600" fontSize="sm">
         How is the information being secured?
@@ -44,7 +45,7 @@ const Consent = ({ currentState, setCurrentState }) => {
         No! Unless you specifically request for us to do so.
       </Box>
       <Box mt="1rem" fontWeight="600" fontSize="sm">
-        Can I remove your access to the information?
+        Can I remove Safe Rate's access to the information?
       </Box>
       <Box mt="0.25rem" fontSize="sm">
         Yes! You can do so at any time. We will only need to retain the

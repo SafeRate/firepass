@@ -1,6 +1,6 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { GRAPHQL_URL } from "./utils/constants";
+import { env } from "./utils/env";
 import useFetch from "./utils/useFetch";
 
 const VerifyIdentity = (props) => {
@@ -14,7 +14,7 @@ const VerifyIdentity = (props) => {
       flexDirection={"column"}
     >
       <Box fontSize="md" fontWeight="400" padding="1rem 1.5rem">
-        Let's verify your identity in 3 easy steps with 3 pieces of info!
+        Let's verify your identity in 3 easy steps!
       </Box>
       <Button
         colorScheme={"purple"}
@@ -49,7 +49,7 @@ const VerifyIdentityFetch = ({
   setFormErrors,
   setIsFetching,
 }) => {
-  const { data, error } = useFetch<any>(GRAPHQL_URL, {
+  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
