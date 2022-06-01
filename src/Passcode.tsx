@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import {
   Box,
   Button,
@@ -9,8 +10,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { env } from "./utils/env";
-import useFetch from "./utils/useFetch";
+import { COMPLETE_INSTA_TOUCH_ID_OTP } from "./graphql";
 
 const Passcode = (props) => {
   const [formErrors, setFormErrors] = useState([]);
@@ -178,38 +178,25 @@ const PasscodeFetch = ({
   SSN,
   zipCode,
 }) => {
-  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const { data, error } = useQuery(COMPLETE_INSTA_TOUCH_ID_OTP, {
+    variables: {
+      mobileNumber: currentState.mobileNumber,
+      passcode,
+      sessionId: currentState.sessionId,
+      SSN,
+      transactionKey: currentState.transactionKey,
+      zipCode,
     },
-    body: JSON.stringify({
-      query: `
-          mutation completeInstaTouchIdOtp($mobileNumber: String!, $passcode: String!, $sessionId: String!, $transactionKey: String!, $zipCode: String!, $SSN: String!) {
-            completeInstaTouchIdOtp(mobileNumber: $mobileNumber, passcode: $passcode, sessionId: $sessionId, transactionKey: $transactionKey, zipCode: $zipCode, SSN: $SSN)
-          }
-        `,
-      variables: {
-        mobileNumber: currentState.mobileNumber,
-        passcode,
-        sessionId: currentState.sessionId,
-        SSN,
-        transactionKey: currentState.transactionKey,
-        zipCode,
-      },
-    }),
   });
 
   useEffect(() => {
     if (data) {
-      if (data.data) {
-        if (data.data.completeInstaTouchIdOtp) {
-          const newState = { ...currentState };
+      if (data.completeInstaTouchIdOtp) {
+        const newState = { ...currentState };
 
-          newState.stepNumber = currentState.stepNumber += 1;
+        newState.stepNumber = currentState.stepNumber += 1;
 
-          setCurrentState(newState);
-        }
+        setCurrentState(newState);
       }
     }
   }, [data]);
