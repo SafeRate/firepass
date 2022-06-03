@@ -96,7 +96,7 @@ const MobileNumberFetch = ({
           }
         `,
       variables: {
-        mobileNumber,
+        mobileNumber: mobileNumber.replace(/\D/g, ""),
         sessionId: currentState.sessionId,
       },
     }),
