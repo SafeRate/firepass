@@ -1,7 +1,8 @@
+import { useQuery } from "@apollo/client";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
+import { GET_INSTA_TOUCH_ID_SESSION } from "./graphql";
 import { env } from "./utils/env";
-import useFetch from "./utils/useFetch";
 
 const VerifyIdentity = (props) => {
   const [isFetching, setIsFetching] = useState(false);
@@ -49,45 +50,27 @@ const VerifyIdentityFetch = ({
   setFormErrors,
   setIsFetching,
 }) => {
-  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
-          query getInstaTouchIdSession {
-            getInstaTouchIdSession {
-                carrier
-                instaTouch
-                sessionId
-            }
-          }
-        `,
-    }),
-  });
+  const { data, error } = useQuery(GET_INSTA_TOUCH_ID_SESSION);
 
   useEffect(() => {
     if (data) {
-      if (data.data) {
-        if (data.data.getInstaTouchIdSession) {
-          const fetchedData = data.data.getInstaTouchIdSession;
+      if (data.getInstaTouchIdSession) {
+        const fetchedData = data.getInstaTouchIdSession;
 
-          const newState = { ...currentState };
-          if (fetchedData.carrier !== currentState.carrier) {
-            newState.carrier = fetchedData.carrier;
-          }
-          if (fetchedData.instaTouch !== currentState.instaTouch) {
-            newState.instaTouch = fetchedData.instaTouch;
-          }
-          if (fetchedData.sessionId !== currentState.sessionId) {
-            newState.sessionId = fetchedData.sessionId;
-          }
-
-          newState.stepNumber = currentState.stepNumber += 1;
-
-          setCurrentState(newState);
+        const newState = { ...currentState };
+        if (fetchedData.carrier !== currentState.carrier) {
+          newState.carrier = fetchedData.carrier;
         }
+        if (fetchedData.instaTouch !== currentState.instaTouch) {
+          newState.instaTouch = fetchedData.instaTouch;
+        }
+        if (fetchedData.sessionId !== currentState.sessionId) {
+          newState.sessionId = fetchedData.sessionId;
+        }
+
+        newState.stepNumber = currentState.stepNumber += 1;
+
+        setCurrentState(newState);
       }
     }
   }, [data]);
