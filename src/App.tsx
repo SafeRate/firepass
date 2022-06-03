@@ -6,7 +6,7 @@ import Login from "./Login";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );

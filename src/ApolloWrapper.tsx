@@ -1,6 +1,7 @@
 import {
   ApolloClient,
   ApolloLink,
+  ApolloProvider,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
@@ -79,7 +80,11 @@ const ApolloWrapper: React.FC = ({ children }) => {
         let handle: any;
         Promise.resolve(operation)
           .then((operation) => {
+            console.log("accessToken", accessToken);
+            console.log("idToken", idToken);
             if (accessToken && idToken) {
+              console.log("accessToken", accessToken);
+              console.log("idToken", idToken);
               operation.setContext({
                 headers: {
                   authorization: `bearer ${accessToken}`,
@@ -113,7 +118,7 @@ const ApolloWrapper: React.FC = ({ children }) => {
 
   if (!client) return null;
 
-  return <>{children}</>;
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
 export default ApolloWrapper;

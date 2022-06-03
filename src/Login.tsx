@@ -7,7 +7,12 @@ const Login = () => {
 
   return (
     <Box>
-      <Button colorScheme={"pink"} onClick={() => {}}>
+      <Button
+        colorScheme={"pink"}
+        onClick={() => {
+          loginWithRedirect();
+        }}
+      >
         Sign In
       </Button>
     </Box>
