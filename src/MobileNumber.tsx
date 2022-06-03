@@ -1,8 +1,8 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
+import { useQuery } from "@apollo/client";
 import React, { useState, useEffect } from "react";
 import InputPhoneNumber from "./components/InputPhoneNumber";
-import { env } from "./utils/env";
-import useFetch from "./utils/useFetch";
+import { GET_TOUCH_ID_OTP_PASSCODE } from "./graphql";
 
 const MobileNumber = (props) => {
   const [formErrors, setFormErrors] = useState([]);
@@ -81,49 +81,33 @@ const MobileNumberFetch = ({
   setIsFetching,
   setFormErrors,
 }) => {
-  const { data, error } = useFetch<any>(env.FIREPASS_GRAPHQL_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const { data, error } = useQuery(GET_TOUCH_ID_OTP_PASSCODE, {
+    variables: {
+      mobileNumber,
+      sessionId: currentState.sessionId,
     },
-    body: JSON.stringify({
-      query: `
-          query getTouchIdOtpPasscode($sessionId: String!, $mobileNumber: String!) {
-            getTouchIdOtpPasscode(sessionId: $sessionId, mobileNumber: $mobileNumber) {
-                sessionId
-                transactionKey
-            }
-          }
-        `,
-      variables: {
-        mobileNumber: mobileNumber.replace(/\D/g, ""),
-        sessionId: currentState.sessionId,
-      },
-    }),
   });
 
   useEffect(() => {
     if (data) {
-      if (data.data) {
-        if (data.data.getTouchIdOtpPasscode) {
-          const fetchedData = data.data.getTouchIdOtpPasscode;
+      if (data.data.getTouchIdOtpPasscode) {
+        const fetchedData = data.data.getTouchIdOtpPasscode;
 
-          const newState = { ...currentState };
-          if (fetchedData.sessionId !== currentState.sessionId) {
-            newState.sessionId = fetchedData.sessionId;
-          }
-          if (fetchedData.transactionKey !== currentState.transactionKey) {
-            newState.transactionKey = fetchedData.transactionKey;
-          }
-
-          if (mobileNumber !== currentState.mobileNumber) {
-            newState.mobileNumber = mobileNumber;
-          }
-
-          newState.stepNumber = currentState.stepNumber += 1;
-
-          setCurrentState(newState);
+        const newState = { ...currentState };
+        if (fetchedData.sessionId !== currentState.sessionId) {
+          newState.sessionId = fetchedData.sessionId;
         }
+        if (fetchedData.transactionKey !== currentState.transactionKey) {
+          newState.transactionKey = fetchedData.transactionKey;
+        }
+
+        if (mobileNumber !== currentState.mobileNumber) {
+          newState.mobileNumber = mobileNumber;
+        }
+
+        newState.stepNumber = currentState.stepNumber += 1;
+
+        setCurrentState(newState);
       }
     }
   }, [data]);

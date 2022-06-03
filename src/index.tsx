@@ -3,17 +3,21 @@ import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import App from "./Home";
 import { env } from "./utils/env";
-
-console.log(env.FIREPASS_GRAPHQL_URL);
+import { Auth0Provider } from "@auth0/auth0-react";
+import ApolloWrapper from "./ApolloWrapper";
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    <Auth0Provider clientId={env.AUTH0_CLIENT_ID} domain={env.AUTH0_DOMAIN}>
+      <ChakraProvider>
+        <ApolloWrapper>
+          <App />
+        </ApolloWrapper>
+      </ChakraProvider>
+    </Auth0Provider>
   </React.StrictMode>
 );

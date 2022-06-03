@@ -21,12 +21,15 @@
     "org": "saferate"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
+    "@auth0/auth0-react": "^1.10.1",
     "@chakra-ui/react": "^2.1.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "framer-motion": "^6.3.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
     "react-text-mask": "^5.4.3"
   }
 }

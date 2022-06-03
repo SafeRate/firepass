@@ -9,19 +9,7 @@ clonedParamsKeys.forEach((key) => {
   clonedParams[`VITE_${key}`] = clonedParams[key];
   delete clonedParams[key];
 });
-console.log("clonedParams", clonedParams);
 
-// https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-//   build: {
-//     rollupOptions: {
-//       output: {
-//         dir: "./static",
-//       },
-//     },
-//   },
-// });
 export default ({ mode }) => {
   // Load app-level env vars to node-level env vars.
   process.env = {

@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_STAGE_NAME: string;
+  readonly AUTH0_CLIENT_ID: string;
+  readonly AUTH0_DOMAIN: string;
   readonly VITE_FIREPASS_GRAPHQL: string;
-  // more env variables...
 }
 
 interface ImportMeta {
