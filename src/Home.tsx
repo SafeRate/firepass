@@ -6,6 +6,7 @@ import Success from "./Success";
 import VerifyIdentity from "./VerifyIdentity";
 import MobileNumber from "./MobileNumber";
 import Consent from "./Consent";
+import PlaidButton from "./PlaidButton";
 
 const Home = () => {
   const [currentState, setCurrentState] = useState({
@@ -69,6 +70,9 @@ const Home = () => {
             <Success />
           )}
         </Box>
+      </Box>
+      <Box>
+        <PlaidButton />
       </Box>
     </Flex>
   );
