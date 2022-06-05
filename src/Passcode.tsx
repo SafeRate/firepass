@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   Box,
   Button,
@@ -178,16 +178,23 @@ const PasscodeFetch = ({
   SSN,
   zipCode,
 }) => {
-  const { data, error } = useQuery(COMPLETE_INSTA_TOUCH_ID_OTP, {
-    variables: {
-      mobileNumber: currentState.mobileNumber,
-      passcode,
-      sessionId: currentState.sessionId,
-      SSN,
-      transactionKey: currentState.transactionKey,
-      zipCode,
-    },
-  });
+  const [completeInstatouchIdOtp, { data, error }] = useMutation(
+    COMPLETE_INSTA_TOUCH_ID_OTP,
+    {
+      variables: {
+        mobileNumber: currentState.mobileNumber,
+        passcode,
+        sessionId: currentState.sessionId,
+        SSN,
+        transactionKey: currentState.transactionKey,
+        zipCode,
+      },
+    }
+  );
+
+  useEffect(() => {
+    completeInstatouchIdOtp();
+  }, []);
 
   useEffect(() => {
     if (data) {

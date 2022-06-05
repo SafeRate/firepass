@@ -16,6 +16,33 @@ export const completeInstaTouchIdOtp = gql`
       transactionKey: $transactionKey
       zipCode: $zipCode
       SSN: $SSN
-    )
+    ) {
+      id
+      name {
+        firstName
+        lastName
+      }
+      currentAddresses {
+        streetAddress
+        city
+        state
+        zipcode
+      }
+      previousAddresses {
+        streetAddress
+        city
+        state
+        zipcode
+      }
+      identification {
+        ssn
+        dob
+      }
+      contact {
+        emailAddress
+        homePhone
+        mobile
+      }
+    }
   }
 `;

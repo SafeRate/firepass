@@ -59,7 +59,7 @@ const MobileNumber = (props) => {
       </Flex>
       {isFetching && (
         <MobileNumberFetch
-          mobileNumber={mobileNumber}
+          mobileNumber={mobileNumber.match(/\d/g).join("")}
           {...props}
           setIsFetching={setIsFetching}
           setFormErrors={setFormErrors}
@@ -90,8 +90,8 @@ const MobileNumberFetch = ({
 
   useEffect(() => {
     if (data) {
-      if (data.data.getTouchIdOtpPasscode) {
-        const fetchedData = data.data.getTouchIdOtpPasscode;
+      if (data.getTouchIdOtpPasscode) {
+        const fetchedData = data.getTouchIdOtpPasscode;
 
         const newState = { ...currentState };
         if (fetchedData.sessionId !== currentState.sessionId) {
