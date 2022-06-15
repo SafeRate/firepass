@@ -16,7 +16,7 @@ const VerifyIdentity = (props) => {
       flexDirection={"column"}
     >
       <Box fontSize="md" fontWeight="400" padding="1rem 1.5rem">
-        Let's verify your identity in 3 easy steps!
+        Welcome to Safe Rate! What would you like to do?
       </Box>
       <ButtonGroup>
         <Button
@@ -28,7 +28,7 @@ const VerifyIdentity = (props) => {
             setIsFetching(true);
           }}
         >
-          Get Started
+          Verify My Identity
         </Button>
         <PlaidButton />
       </ButtonGroup>
