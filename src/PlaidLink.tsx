@@ -43,6 +43,8 @@ const PlaidLink: FunctionComponent<Props> = ({
         console.log(metadata);
         alert("made it");
       } else {
+        console.log("public_token", public_token);
+        console.log("metadata", metadata);
         addBorrowerBankAccountsViaPlaid({
           variables: {
             plaidId: public_token,
