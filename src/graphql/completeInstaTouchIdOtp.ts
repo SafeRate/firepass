@@ -26,13 +26,13 @@ export const completeInstaTouchIdOtp = gql`
         streetAddress
         city
         state
-        zipcode
+        zipCode
       }
       previousAddresses {
         streetAddress
         city
         state
-        zipcode
+        zipCode
       }
       identification {
         ssn

@@ -71,7 +71,7 @@ const PlaidLink: FunctionComponent<Props> = ({
     return <Spinner />;
   } else {
     return (
-      <Button onClick={() => open()} disabled={!ready}>
+      <Button onClick={() => open()} disabled={!ready} my="3">
         {text ? text : "Connect a bank account"}
       </Button>
     );

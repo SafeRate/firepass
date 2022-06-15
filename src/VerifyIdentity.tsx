@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { GET_INSTA_TOUCH_ID_SESSION } from "./graphql";
+import PlaidButton from "./PlaidButton";
 import { env } from "./utils/env";
 
 const VerifyIdentity = (props) => {
@@ -17,17 +18,20 @@ const VerifyIdentity = (props) => {
       <Box fontSize="md" fontWeight="400" padding="1rem 1.5rem">
         Let's verify your identity in 3 easy steps!
       </Box>
-      <Button
-        colorScheme={"purple"}
-        isDisabled={isFetching}
-        isLoading={isFetching}
-        my="3"
-        onClick={() => {
-          setIsFetching(true);
-        }}
-      >
-        Get Started
-      </Button>
+      <ButtonGroup>
+        <Button
+          colorScheme={"purple"}
+          isDisabled={isFetching}
+          isLoading={isFetching}
+          my="3"
+          onClick={() => {
+            setIsFetching(true);
+          }}
+        >
+          Get Started
+        </Button>
+        <PlaidButton />
+      </ButtonGroup>
       {isFetching && (
         <VerifyIdentityFetch
           {...props}

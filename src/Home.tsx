@@ -18,6 +18,7 @@ const Home = () => {
     sessionId: null,
     SSN: null,
     stepNumber: 1,
+    successData: null,
     transactionKey: null,
     zipCode: null,
   });
@@ -67,12 +68,9 @@ const Home = () => {
               setCurrentState={setCurrentState}
             />
           ) : (
-            <Success />
+            <Success currentState={currentState} />
           )}
         </Box>
-      </Box>
-      <Box>
-        <PlaidButton />
       </Box>
     </Flex>
   );

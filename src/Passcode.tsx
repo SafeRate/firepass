@@ -192,6 +192,8 @@ const PasscodeFetch = ({
     }
   );
 
+  console.log("data", data);
+
   useEffect(() => {
     completeInstatouchIdOtp();
   }, []);
@@ -202,6 +204,7 @@ const PasscodeFetch = ({
         const newState = { ...currentState };
 
         newState.stepNumber = currentState.stepNumber += 1;
+        newState.successData = data.completeInstaTouchIdOtp;
 
         setCurrentState(newState);
       }

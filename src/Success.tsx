@@ -2,6 +2,16 @@ import { Box, Button, ButtonGroup, Flex, LinkBox } from "@chakra-ui/react";
 import React from "react";
 
 const Success = (props) => {
+  console.log("props.currentState", props.currentState);
+
+  if (!props.currentState.successData) {
+    return <Box>Ut oh! We did not find your data</Box>;
+  }
+
+  const { successData } = props.currentState;
+
+  const currentAddress = successData.currentAddresses[0];
+
   return (
     <Flex
       justifyContent={"left"}
@@ -13,13 +23,22 @@ const Success = (props) => {
         Great, we were able to get your info!
       </Box>
       <Box>Address</Box>
-      <Box>123 Main St Chicago, IL 12345</Box>
+      <Box>
+        {currentAddress.streetAddress} {currentAddress.city},{" "}
+        {currentAddress.state} {currentAddress.zipCode}
+      </Box>
       <Box mt="1rem">Date of Birth</Box>
-      <Box>April 12, 1986</Box>
+      <Box>{successData.identification.dob}</Box>
       <Box mt="1rem">Phone number</Box>
-      <Box>(XXX) 123-1234</Box>
+      <Box>{getPrettyPhone(successData.contact.mobile)}</Box>
+      <Box mt="1rem">Last 4 digits of SS#</Box>
+      <Box>
+        {successData.identification.ssn.substr(
+          successData.identification.ssn.length - 4
+        )}
+      </Box>
       <Box mt="1rem">Email</Box>
-      <Box>name@domain.com</Box>
+      <Box>{successData.contact.emailAddress}</Box>
       <ButtonGroup mt="1rem">
         <LinkBox>
           <Button as="a" colorScheme={"purple"} href="https://saferate.com">
@@ -35,3 +54,7 @@ const Success = (props) => {
 };
 
 export default Success;
+
+const getPrettyPhone = (s: string) => {
+  return s.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+};
