@@ -42,11 +42,11 @@ const Success = (props) => {
       <ButtonGroup mt="1rem">
         <LinkBox>
           <Button as="a" colorScheme={"purple"} href="https://saferate.com">
-            Get preapproved
+            Get preapproved for a loan
           </Button>
         </LinkBox>
         <Button as={"a"} colorScheme={"blue"} href="https://saferate.com">
-          Track my credit
+          Enroll in credit tracking
         </Button>
       </ButtonGroup>
     </Flex>
