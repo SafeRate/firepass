@@ -1,12 +1,11 @@
 import { Box, Button, Divider, Flex } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { SafeRateLogo } from "./components/SafeRateLogo";
 import Passcode from "./Passcode";
 import Success from "./Success";
 import VerifyIdentity from "./VerifyIdentity";
 import MobileNumber from "./MobileNumber";
 import Consent from "./Consent";
-import PlaidButton from "./PlaidButton";
 
 const Home = () => {
   const [currentState, setCurrentState] = useState({

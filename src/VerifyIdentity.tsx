@@ -1,13 +1,21 @@
 import { useQuery } from "@apollo/client";
-import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  EditablePreview,
+  Flex,
+} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import GeographySearch from "./GeographySearch";
 import { GET_INSTA_TOUCH_ID_SESSION } from "./graphql";
 import PlaidButton from "./PlaidButton";
-import { env } from "./utils/env";
+import { VerifyProperty } from "./VerifyProperty";
 
 const VerifyIdentity = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
+  const [verifyProperty, setVerifyProperty] = useState("");
 
   return (
     <Flex
@@ -32,6 +40,29 @@ const VerifyIdentity = (props) => {
         </Button>
         <PlaidButton />
       </ButtonGroup>
+      {verifyProperty ? (
+        <VerifyProperty fullAddress={verifyProperty} />
+      ) : (
+        <GeographySearch
+          label={"Verify A Property"}
+          name={"Address"}
+          allowMultiple={false}
+          maxSelect={1}
+          searchAddress={true}
+          searchCity={false}
+          searchNeighborhood={false}
+          searchPostcode={false}
+          searchCountry={false}
+          searchCounty={false}
+          onChange={(value) => {
+            if (Array.isArray(value) && value.length > 0) {
+              const fullAddress = value[0].label;
+              setVerifyProperty(fullAddress);
+            }
+          }}
+        />
+      )}
+
       {isFetching && (
         <VerifyIdentityFetch
           {...props}
