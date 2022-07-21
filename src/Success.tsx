@@ -1,5 +1,7 @@
 import { Box, Button, ButtonGroup, Flex, LinkBox } from "@chakra-ui/react";
 import React from "react";
+import { useLazyQuery } from "@apollo/client";
+import { GET_CREDIT_REPORT } from "./graphql";
 
 const Success = (props) => {
   console.log("props.currentState", props.currentState);
@@ -11,6 +13,8 @@ const Success = (props) => {
   const { successData } = props.currentState;
 
   const currentAddress = successData.currentAddresses[0];
+
+  const [getCreditReport, { loading, data }] = useLazyQuery(GET_CREDIT_REPORT);
 
   return (
     <Flex
@@ -41,9 +45,17 @@ const Success = (props) => {
       <Box>{successData.contact.emailAddress}</Box>
       <ButtonGroup mt="1rem">
         <LinkBox>
-          <Button as="a" colorScheme={"purple"} href="https://saferate.com">
-            Get preapproved for a loan
-          </Button>
+          {data ? (
+            <Box>Credit Report ID: {data.getCreditReport}</Box>
+          ) : (
+            <Button
+              as="a"
+              colorScheme={"purple"}
+              onClick={() => getCreditReport()}
+            >
+              Run my credit!
+            </Button>
+          )}
         </LinkBox>
         <Button as={"a"} colorScheme={"blue"} href="https://saferate.com">
           Enroll in credit tracking
