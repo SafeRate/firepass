@@ -3,5 +3,7 @@ export { getInstaTouchIdSession as GET_INSTA_TOUCH_ID_SESSION } from "./getInsta
 export { getPropertyInformation as GET_PROPERTY_INFORMATION } from "./getPropertyInformation";
 export { getTouchIdOtpPasscode as GET_TOUCH_ID_OTP_PASSCODE } from "./getTouchIdOtpPasscode";
 export { completeInstaTouchIdOtp as COMPLETE_INSTA_TOUCH_ID_OTP } from "./completeInstaTouchIdOtp";
+export { getUserData as GET_USER_DATA } from "./getUserData";
+export { getFirePassQuote as GET_FIREPASS_QUOTE } from "./getFirePassQuote";
 export { getPlaidLinkToken as GET_PLAID_LINK_TOKEN } from "./getPlaidLinkToken";
 export { addBankAccountsViaPlaid as ADD_BANK_ACCOUNTS_VIA_PLAID } from "./addBankAccountsViaPlaid";

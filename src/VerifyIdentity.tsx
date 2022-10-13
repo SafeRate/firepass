@@ -11,11 +11,13 @@ import GeographySearch from "./GeographySearch";
 import { GET_INSTA_TOUCH_ID_SESSION } from "./graphql";
 import PlaidButton from "./PlaidButton";
 import { VerifyProperty } from "./VerifyProperty";
+import { useNavigate } from "react-router-dom";
 
 const VerifyIdentity = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
   const [verifyProperty, setVerifyProperty] = useState("");
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -28,17 +30,23 @@ const VerifyIdentity = (props) => {
       </Box>
       <ButtonGroup>
         <Button
-          colorScheme={"purple"}
           isDisabled={isFetching}
           isLoading={isFetching}
-          my="3"
           onClick={() => {
             setIsFetching(true);
           }}
         >
           Verify My Identity
         </Button>
-        <PlaidButton />
+        {/* <PlaidButton /> */}
+        <Button
+          colorScheme={"purple"}
+          onClick={() => {
+            navigate("/quote");
+          }}
+        >
+          One-click Quote!
+        </Button>
       </ButtonGroup>
       {verifyProperty ? (
         <VerifyProperty fullAddress={verifyProperty} />

@@ -1,5 +1,4 @@
 import { Box, Button, ButtonGroup, Flex, LinkBox } from "@chakra-ui/react";
-import React from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_CREDIT_REPORT } from "./graphql";
 
